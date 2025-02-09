@@ -18,8 +18,10 @@ app.use(express.json());
 
 app.use(express.static(path.join(__dirname, "client")));
 
+// routes
 app.use("/api/test", testRoutes);
 
+// error handler middleware (should be last middleware)
 app.use(errorHandler);
 
 app.get("*", (_req: Request, res: Response) => {
