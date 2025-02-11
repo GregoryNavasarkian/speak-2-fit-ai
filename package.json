@@ -1,0 +1,15 @@
+{
+  "name": "speak-2-fit-ai",
+  "version": "1.0.0",
+  "description": "CSCI 577a Project",
+  "main": "index.js",
+  "scripts": {
+    "dev": "concurrently \"cd server && npm run dev\" \"cd client && npm run dev\""
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "concurrently": "^9.1.2"
+  }
+}
