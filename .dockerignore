@@ -1,0 +1,35 @@
+# Ignore environment files
+server/.env
+server/src/.env
+client/.env
+client/src/.env
+client/src/.env.local
+.env
+
+# Ignore node_modules (installed inside Docker container)
+node_modules
+server/node_modules
+client/node_modules
+
+# Ignore logs and cache
+npm-debug.log
+yarn-debug.log
+yarn-error.log
+server/logs
+client/logs
+
+# Ignore build artifacts (to avoid conflicts)
+server/dist
+client/dist
+
+# Ignore system files and editor configs
+.DS_Store
+.vscode/
+.idea/
+*.swp
+
+# Ignore Git files
+.git
+.gitignore
+server/.gitignore
+client/.gitignore
