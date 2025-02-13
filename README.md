@@ -2,6 +2,11 @@
 
 ## How To Run
 
+### Dependencies
+
+- Node v22
+- Docker
+
 ### Development Mode
 
 ```
