@@ -1,0 +1,58 @@
+name: Speak2Fit CI/CD Pipeline
+
+on:
+  push:
+    branches:
+      - main # Runs on commits pushed to main
+  pull_request:
+    branches:
+      - main # Runs on PRs targeting main
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    env:
+      MONGO_URI: ${{ secrets.MONGO_URI }}
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Use Node v22
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Install Server Dependencies
+        run: |
+          cd server
+          npm ci
+
+      - name: Install Client Dependencies
+        run: |
+          cd client
+          npm ci
+
+      - name: Lint Server
+        run: |
+          cd server
+          npm run lint
+
+      - name: Lint Client
+        run: |
+          cd client
+          npm run lint
+
+      - name: Format Server
+        run: |
+          cd server
+          npm run format
+
+      - name: Format Client
+        run: |
+          cd client
+          npm run format
+
+      - name: Build Docker Image
+        run: |
+          docker build -t speak2fit .
