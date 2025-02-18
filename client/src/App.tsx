@@ -1,6 +1,5 @@
 import React from "react";
 import Button from "react-bootstrap/Button";
-
 import TestComp from "./components/TestComp";
 
 const App: React.FC = () => {

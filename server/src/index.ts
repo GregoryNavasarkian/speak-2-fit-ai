@@ -6,6 +6,7 @@ import { errorHandler } from "./middleware/errorHandler";
 
 //import routes
 import testRoutes from "./routes/testRoutes";
+import exerciseLogRoutes from "./routes/exerciseLogRoutes";
 
 // Load environment variables from .env file in root directory
 dotenv.config({ path: path.join(__dirname, "..", ".env") });
@@ -20,6 +21,7 @@ app.use(express.static(path.join(__dirname, "client")));
 
 // routes
 app.use("/api/test", testRoutes);
+app.use("/api/exercise-log", exerciseLogRoutes);
 
 // error handler middleware (should be last middleware)
 app.use(errorHandler);
