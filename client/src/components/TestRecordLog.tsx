@@ -5,7 +5,6 @@ import React, { useState, useEffect } from "react";
 const TestRecordLog: React.FC = () => {
     const [isRecording, setIsRecording] = useState(false);
     const [mediaRecorder, setMediaRecorder] = useState<MediaRecorder | null>(null);
-    const [audioURL, setAudioURL] = useState<string | null>(null);
 
     useEffect(() => {
         if (isRecording) {
@@ -16,9 +15,6 @@ const TestRecordLog: React.FC = () => {
 
                     recorder.ondataavailable = async (event) => {
                         const audioBlob = new Blob([event.data], { type: 'audio/wav' });
-                        const audioUrl = URL.createObjectURL(audioBlob);
-
-                        setAudioURL(audioUrl);
 
                         // Send audio to backend
                         const formData = new FormData();
