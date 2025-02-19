@@ -6,10 +6,10 @@ import path from "path";
 
 const upload = multer({ dest: "uploads/" });
 
-// POST /api/translate-log
+// POST /api/excersise-log/translate
 // @desc Receive audio file and forward to Google Gemini API
 // @access Public
-export const getTranslateLog = [
+export const postTranslateLog = [
     upload.single("file"),
     async (_req: Request, res: Response, next: NextFunction) => {
         try {

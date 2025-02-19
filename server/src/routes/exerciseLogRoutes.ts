@@ -1,8 +1,8 @@
 import express from "express";
-import { getTranslateLog } from "../controllers/translateLogController";
+import { postTranslateLog } from "../controllers/translateLogController";
 
 const router = express.Router();
 
-router.post("/translate", getTranslateLog);
+router.post("/translate", postTranslateLog);
 
 export default router;
