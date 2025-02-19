@@ -1,16 +1,21 @@
 import React from "react";
-import Button from "react-bootstrap/Button";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-import TestComp from "./components/TestComp";
+import MainNavbar from "./components/MainNavbar";
+import HomeRoute from "./routes/HomeRoute";
+import ExerciseRoute from "./routes/ExerciseRoute";
+import InsightRoute from "./routes/InsightRoute";
 
 const App: React.FC = () => {
   return (
-    <>
-      <h1>React App</h1>
-      <p>Start editing the App component to get started</p>
-      <Button variant="primary">Click me</Button>
-      <TestComp />
-    </>
+    <BrowserRouter>
+      <MainNavbar />
+      <Routes>
+        <Route path="/" element={<HomeRoute />} />
+        <Route path="/exercise" element={<ExerciseRoute />} />
+        <Route path="/insights" element={<InsightRoute />} />
+      </Routes>
+    </BrowserRouter>
   );
 };
 
