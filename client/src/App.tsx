@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 import MainNavbar from "./components/MainNavbar";
 import HomeRoute from "./routes/HomeRoute";
-import ExerciseRoute from "./routes/ExerciseRoute";
+import ExercisesRoute from "./routes/ExercisesRoute";
 import InsightRoute from "./routes/InsightRoute";
 
 const App: React.FC = () => {
@@ -12,7 +12,7 @@ const App: React.FC = () => {
       <MainNavbar />
       <Routes>
         <Route path="/" element={<HomeRoute />} />
-        <Route path="/exercise" element={<ExerciseRoute />} />
+        <Route path="/exercises" element={<ExercisesRoute />} />
         <Route path="/insights" element={<InsightRoute />} />
       </Routes>
     </BrowserRouter>

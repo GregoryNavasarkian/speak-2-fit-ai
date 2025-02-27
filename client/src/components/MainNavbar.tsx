@@ -22,10 +22,10 @@ const MainNavbar: React.FC = () => {
             </Nav.Link>
             <Nav.Link
               as={Link}
-              to="/exercise"
+              to="/exercises"
               className="text-white fw-bold mx-2"
             >
-              Exercise
+              Exercises
             </Nav.Link>
             <Nav.Link
               as={Link}
