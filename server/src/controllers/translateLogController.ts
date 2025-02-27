@@ -60,7 +60,6 @@ export const postTranslateLog = [
                     },
                 },
             ]);
-            console.log(result.response.text());
 
             const prompt = `${result.response.text()}, Return a JSON string, Use this JSON schema:
 
@@ -75,9 +74,10 @@ export const postTranslateLog = [
             const trimmedJSON = trimFront.slice(0, -3);
             const jsonResponse = JSON.parse(trimmedJSON);
 
-            res.status(200).json({ message: "Audio file sent successfully", result: jsonResponse });
+            res.status(200).json({ message: "Log translated successfully", result: jsonResponse });
         } catch (error) {
             next(error);
+            res.status(500).json({ message: "Error processing log" });
         }
     }
 ]
