@@ -30,7 +30,10 @@ docker build -t speak2fit .
 #### Run with Docker
 
 ```
-docker run -dp 3000:3000 --name speak2fit <--env MONGO_URI="atlas-uri"> speak2fit
+docker run -dp 3000:3000 --name speak2fit \
+  -e MONGO_URI="mongo-uri" \
+  -e GEMINI_API_KEY="gemini-api-key" \
+  speak2fit
 ```
 
 #### Stop and remove container
