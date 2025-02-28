@@ -33,6 +33,7 @@ const ExerciseRoute: React.FC = () => {
 
   // Handle Save Button Click
   const handleSave = (log: Log) => {
+    console.log(log);
     // setLogs((prevLogs) => [...prevLogs, log]);
     // setPendingLogs((prevPendingLogs) => prevPendingLogs.filter((pendingLog) => pendingLog.id !== log.id));
   };
