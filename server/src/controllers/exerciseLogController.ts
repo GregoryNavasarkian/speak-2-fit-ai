@@ -2,7 +2,7 @@ import { Request, Response, NextFunction } from "express";
 import ExerciseLog from "../models/exerciseLogModel";
 
 // POST /api/exercise-log
-// @desc This endpoint takes the verified and submitted data from the pending logs and creates an entry in the database and sends back the success or error message to the frontend.
+// @desc Create a new exercise log in the database
 // @access Public
 export const postExerciseLog = async (_req: Request, res: Response, next: NextFunction) => {
     try {
