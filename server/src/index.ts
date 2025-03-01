@@ -3,7 +3,7 @@ import cors from "cors";
 import dotenv from "dotenv";
 import path from "path";
 import { errorHandler } from "./middleware/errorHandler";
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 //import routes
 import testRoutes from "./routes/testRoutes";
@@ -32,11 +32,14 @@ app.get("*", (_req: Request, res: Response) => {
   res.sendFile(path.join(__dirname, "client", "index.html"));
 });
 
-mongoose.connect(mongoUri).then(() => {
-  console.log('Connected to MongoDB');
-}).catch((err) => {
-  console.error('Error connecting to MongoDB:', err);
-});
+mongoose
+  .connect(mongoUri)
+  .then(() => {
+    console.log("Connected to MongoDB");
+  })
+  .catch((err) => {
+    console.error("Error connecting to MongoDB:", err);
+  });
 
 app.listen(PORT, () => {
   console.log(`Server running on http://localhost:${PORT}`);

@@ -1,11 +1,11 @@
 import express from "express";
 import { postTranslateLog } from "../controllers/translateLogController";
-import { 
-    postExerciseLog, 
-    getExerciseLogs, 
-    getExerciseLog, 
-    updateExerciseLog, 
-    deleteExerciseLog 
+import {
+  postExerciseLog,
+  getExerciseLogs,
+  getExerciseLog,
+  updateExerciseLog,
+  deleteExerciseLog
 } from "../controllers/exerciseLogController";
 
 const router = express.Router();
