@@ -1,9 +1,7 @@
 import React, { useState } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import 'bootstrap-icons/font/bootstrap-icons.css';
-
 
 interface Row {
   id: number;
@@ -11,18 +9,16 @@ interface Row {
   details: string[];
 }
 
-interface CardComponentProps {
-  onSave?: () => void;
-  onDelete: () => void;
-  showSaveButton?: boolean;
+interface ExerciseCardProps {
+  log: {
+    id: number;
+    date: Date;
+    rows: Row[];
+  };
 }
 
-const CardComponent: React.FC<CardComponentProps> = ({ onSave, onDelete, showSaveButton = true }) => {
-  const [rows, setRowData] = useState<Row[]>([
-    { id: 1, activity: "Bicep Curl", details: ["3 sets", "10 reps", "15 lbs"] },
-    { id: 2, activity: "In-door Running", details: ["30 mins"] },
-  ]);
-
+const ExerciseCard: React.FC<ExerciseCardProps> = ({ log }) => {
+  const [rows, setRowData] = useState<Row[]>(log.rows);
   const [cardDate, setCardDate] = useState<Date>(new Date("2025-02-26"));
   const [isEditingRowId, setIsEditingRowId] = useState<number | null>(null);
   const [newDetailInputs, setNewDetailInputs] = useState<Record<number, string[]>>({});
@@ -90,6 +86,8 @@ const CardComponent: React.FC<CardComponentProps> = ({ onSave, onDelete, showSav
     setIsEditingRowId(null);
     setNewDetailInputs({ ...newDetailInputs, [id]: [] });
     setIsAddingRow(false);
+
+    //Call API to save the edited exercise
   };
 
   const showToastMessage = (message: string): void => {
@@ -126,12 +124,15 @@ const CardComponent: React.FC<CardComponentProps> = ({ onSave, onDelete, showSav
   const deleteRow = (id: number): void => {
     setRowData(rows.filter((row) => row.id !== id));
     showToastMessage("Exercise deleted successfully!");
+
+    //Call API to save the edited exercise
   };
 
   const deleteCard = (): void => {
     setIsCardVisible(false);
     showToastMessage("Exercise Log deleted successfully!");
-    onDelete();
+
+    //Call API to delete the exercise
   };
 
   return (
@@ -280,11 +281,6 @@ const CardComponent: React.FC<CardComponentProps> = ({ onSave, onDelete, showSav
                 <i className="bi bi-plus-square"></i>
               </button>
             </div>
-            {showSaveButton && (
-              <button className="btn btn-success btn-sm w-100" onClick={onSave}>
-                Save
-              </button>
-            )}
           </div>
         </div>
       )}
@@ -292,4 +288,4 @@ const CardComponent: React.FC<CardComponentProps> = ({ onSave, onDelete, showSav
   );
 };
 
-export default CardComponent;
+export default ExerciseCard;
