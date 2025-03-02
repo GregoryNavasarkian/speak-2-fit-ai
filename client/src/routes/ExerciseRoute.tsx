@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ExerciseCard from "../components/ExerciseCard";
+import ExerciseLogCard from "../components/ExerciseLogCard";
 
 interface Row {
   id: number;
@@ -35,7 +35,7 @@ const ExerciseRoute: React.FC = () => {
             {logs.length > 0 ? (
               logs.map((log) => (
                 <div className="col-md-4" key={log.id}>
-                  <ExerciseCard
+                  <ExerciseLogCard
                     log={log}
                   />
                 </div>
