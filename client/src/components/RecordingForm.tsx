@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { Form, Button, InputGroup, Spinner, Alert } from "react-bootstrap";
 import { MicFill, MicMuteFill } from "react-bootstrap-icons";
-import ExerciseCard from "./ExerciseCard";
 import Exercise from "../types/exercise.type";
 
 const RecordingForm: React.FC = () => {
@@ -13,7 +12,6 @@ const RecordingForm: React.FC = () => {
   const [audioBlob, setAudioBlob] = useState<Blob | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [hasRecorded, setHasRecorded] = useState<boolean>(false);
-  const [, setTranscribedText] = useState<string>("");
   const [exercises, setExercises] = useState<Exercise[]>([]);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -79,7 +77,6 @@ const RecordingForm: React.FC = () => {
 
       if (result.transcript) {
         setText(result.transcript);
-        setTranscribedText(result.transcript);
       }
 
       if (result.result) {
@@ -98,25 +95,43 @@ const RecordingForm: React.FC = () => {
     setAudioBlob(null);
     setHasRecorded(false);
     setIsRecording(false);
-    setTranscribedText("");
     setExercises([]);
     setErrorMessage(null);
   };
 
-  const handleAddExercise = async () => {
+  const handleExerciseChange = (
+    index: number,
+    field: string,
+    value: string | number,
+  ) => {
+    const newExercises = [...exercises];
+    newExercises[index] = { ...newExercises[index], [field]: value };
+    setExercises(newExercises);
+  };
+
+  const handleSetChange = (
+    exerciseIndex: number,
+    setIndex: number,
+    field: string,
+    value: string | number,
+  ) => {
+    const updatedExercises = [...exercises];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    (updatedExercises[exerciseIndex] as any).sets[setIndex][field] = value;
+    setExercises(updatedExercises);
+  };
+
+  const handleSaveExercises = async () => {
     try {
-      const response = await fetch("/api/exercise-log/save", {
+      const response = await fetch("/api/exercise-log", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ exercises }),
       });
 
       const result = await response.json();
-      if (!result.success) {
-        throw new Error(result.message || "Failed to add exercise.");
-      }
-
-      alert("Exercise added successfully!");
+      console.log(result);
+      handleClear();
     } catch (error) {
       setErrorMessage("Failed to add exercise.");
       console.error(error);
@@ -169,10 +184,92 @@ const RecordingForm: React.FC = () => {
       {exercises.length > 0 && (
         <div className="mt-4">
           {exercises.map((exercise, index) => (
-            <ExerciseCard key={index} exercise={exercise} />
+            <div key={index} className="p-3 mb-3 border rounded">
+              <Form.Group>
+                <Form.Label>Exercise Name</Form.Label>
+                <Form.Control
+                  type="text"
+                  value={exercise.exercise_name}
+                  onChange={(e) =>
+                    handleExerciseChange(index, "exercise_name", e.target.value)
+                  }
+                />
+              </Form.Group>
+
+              <Form.Group className="mt-2">
+                <Form.Label>Type</Form.Label>
+                <Form.Control
+                  as="select"
+                  value={exercise.type}
+                  onChange={(e) =>
+                    handleExerciseChange(index, "type", e.target.value)
+                  }
+                >
+                  <option value="Weight-lifting">Weight-lifting</option>
+                  <option value="Cardio">Cardio</option>
+                </Form.Control>
+              </Form.Group>
+
+              {exercise.type === "Weight-lifting" && exercise.sets && (
+                <>
+                  <h6 className="mt-3">Sets</h6>
+                  {exercise.sets.map((set, setIndex) => (
+                    <div key={setIndex} className="d-flex gap-2">
+                      <Form.Group>
+                        <Form.Label>Weight</Form.Label>
+                        <Form.Control
+                          type="number"
+                          value={set.weight}
+                          onChange={(e) =>
+                            handleSetChange(
+                              index,
+                              setIndex,
+                              "weight",
+                              Number(e.target.value),
+                            )
+                          }
+                        />
+                      </Form.Group>
+
+                      <Form.Group>
+                        <Form.Label>Reps</Form.Label>
+                        <Form.Control
+                          type="number"
+                          value={set.repetitions}
+                          onChange={(e) =>
+                            handleSetChange(
+                              index,
+                              setIndex,
+                              "repetitions",
+                              Number(e.target.value),
+                            )
+                          }
+                        />
+                      </Form.Group>
+                    </div>
+                  ))}
+                </>
+              )}
+
+              {exercise.type === "Cardio" && exercise.time && (
+                <Form.Group className="mt-2">
+                  <Form.Label>Duration (minutes)</Form.Label>
+                  <Form.Control
+                    type="number"
+                    value={exercise.time}
+                    onChange={(e) =>
+                      handleExerciseChange(
+                        index,
+                        "time",
+                        Number(e.target.value),
+                      )
+                    }
+                  />
+                </Form.Group>
+              )}
+            </div>
           ))}
 
-          {/* Error Message */}
           {errorMessage && (
             <Alert variant="danger" className="mt-4">
               {errorMessage}
@@ -186,9 +283,9 @@ const RecordingForm: React.FC = () => {
             }}
             variant="success"
             className="mt-2"
-            onClick={handleAddExercise}
+            onClick={handleSaveExercises}
           >
-            Add Exercise
+            Save Exercise
           </Button>
         </div>
       )}
