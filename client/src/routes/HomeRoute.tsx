@@ -33,7 +33,7 @@ const HomeRoute: React.FC = () => {
           <Collapse in={showHelp}>
             <Card
               className="text-start p-2 mt-1 shadow-sm"
-              style={{ width: "90%", maxWidth: "500px" }}
+              style={{ width: "95%", maxWidth: "500px" }}
             >
               <Card.Body>
                 <Card.Title className="fw-bold">Example Submissions</Card.Title>
@@ -50,7 +50,7 @@ const HomeRoute: React.FC = () => {
         </div>
 
         {/* Form Container */}
-        <div className="p-1" style={{ width: "90%", maxWidth: "600px" }}>
+        <div className="p-1" style={{ width: "95%", maxWidth: "600px" }}>
           <RecordingForm />
         </div>
       </div>

@@ -1,11 +1,16 @@
-const mongoose = require("mongoose");
-const Schema = mongoose.Schema;
+import mongoose, { Schema, Document } from "mongoose";
 
-// Since the exercise log object is dynamic, the log will be of mixed type
-const ExerciseLogModel = new Schema({
-  log: {},
+interface IExerciseLog extends Document {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  log: any;
+  dateTime: Date;
+}
+
+const ExerciseLogSchema = new Schema<IExerciseLog>({
+  log: { type: Schema.Types.Mixed, required: true }, // Allow dynamic objects
   dateTime: { type: Date, default: Date.now }
 });
 
-const ExerciseLog = mongoose.model("exercise-log", ExerciseLogModel);
+const ExerciseLog = mongoose.model<IExerciseLog>("ExerciseLog", ExerciseLogSchema);
+
 export default ExerciseLog;
