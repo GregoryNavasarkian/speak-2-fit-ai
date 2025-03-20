@@ -64,7 +64,7 @@ jobs:
 
       - name: Configure docker for gcloud
         run: |
-          gcloud auth configure-docker
+          gcloud auth configure-docker us-central1-docker.pkg.dev
 
       - name: Push Docker Image
         run: |
