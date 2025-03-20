@@ -55,4 +55,19 @@ jobs:
 
       - name: Build Docker Image
         run: |
-          docker build -t speak2fit .
+          docker build -t us-central1-docker.pkg.dev/speak2fit-ai/speak2fit/speak2fit:latest .
+
+      - name: Push Docker Image
+        run: |
+          docker push us-central1-docker.pkg.dev/speak2fit-ai/speak2fit/speak2fit:latest
+
+      - name: Setup Google Cloud SDK
+        uses: google-github-actions/setup-gcloud@v1
+        with:
+          version: 'latest'
+          project_id: ${{ secrets.GCP_PROJECT_ID }}
+          service_account_key: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+      
+      - name: Deploy App
+        run: |
+          gcloud app deploy --image-url us-central1-docker.pkg.dev/speak2fit-ai/speak2fit/speak2fit
