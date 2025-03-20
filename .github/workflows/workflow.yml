@@ -58,7 +58,7 @@ jobs:
           docker build -t us-central1-docker.pkg.dev/speak2fit-ai/speak2fit/speak2fit:latest .
 
       - name: Log in to Google Cloud
-        uses: google-github-actions/auth@v1
+        uses: google-github-actions/auth@v2
         with:
           credentials_json: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
 
@@ -71,11 +71,10 @@ jobs:
           docker push us-central1-docker.pkg.dev/speak2fit-ai/speak2fit/speak2fit:latest
 
       - name: Setup Google Cloud SDK
-        uses: google-github-actions/setup-gcloud@v1
+        uses: google-github-actions/setup-gcloud@v2
         with:
           version: 'latest'
           project_id: ${{ secrets.GCP_PROJECT_ID }}
-          service_account_key: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
       
       - name: Deploy App
         run: |
