@@ -112,10 +112,9 @@ const Insights: React.FC = () => {
   // Filtered data
   const filtered = flatData.filter((ex) => {
     const withinType = ex.type === selectedType;
-    const exDate = new Date(ex.date.setHours(0, 0, 0, 0));
-    const start = startDate ? new Date(startDate.setHours(0, 0, 0, 0)) : null;
-    const end = endDate ? new Date(endDate.setHours(0, 0, 0, 0)) : null;
-
+    const exDate = new Date(new Date(ex.date).setHours(0, 0, 0, 0));
+    const start = startDate ? new Date(new Date(startDate).setHours(0, 0, 0, 0)) : null;
+    const end = endDate ? new Date(new Date(endDate).setHours(0, 0, 0, 0)) : null;
     const withinDate = (!start || exDate >= start) && (!end || exDate <= end);
 
     const matchesExercise =
