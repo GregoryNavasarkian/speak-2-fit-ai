@@ -113,8 +113,12 @@ const Insights: React.FC = () => {
   const filtered = flatData.filter((ex) => {
     const withinType = ex.type === selectedType;
     const exDate = new Date(new Date(ex.date).setHours(0, 0, 0, 0));
-    const start = startDate ? new Date(new Date(startDate).setHours(0, 0, 0, 0)) : null;
-    const end = endDate ? new Date(new Date(endDate).setHours(0, 0, 0, 0)) : null;
+    const start = startDate
+      ? new Date(new Date(startDate).setHours(0, 0, 0, 0))
+      : null;
+    const end = endDate
+      ? new Date(new Date(endDate).setHours(0, 0, 0, 0))
+      : null;
     const withinDate = (!start || exDate >= start) && (!end || exDate <= end);
 
     const matchesExercise =
@@ -145,7 +149,7 @@ const Insights: React.FC = () => {
 
       return {
         name: e.exercise_name,
-        averageWeight: Number(averageWeight.toFixed(2)),
+        averageWeight: Number(averageWeight.toFixed(0)),
         sets: e.sets,
         date: e.date.toLocaleDateString(),
       };
@@ -311,8 +315,8 @@ const Insights: React.FC = () => {
                     <td>
                       {"sets" in entry && Array.isArray(entry.sets)
                         ? entry.sets
-                          .map((s) => `${s.weight}x${s.repetitions}`)
-                          .join(", ")
+                            .map((s) => `${s.weight}x${s.repetitions}`)
+                            .join(", ")
                         : "-"}
                     </td>
                   )}
