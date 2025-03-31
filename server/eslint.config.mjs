@@ -15,7 +15,16 @@ export default [
       globals: {
         __dirname: "readonly",
         process: "readonly",
-        console: "readonly"
+        console: "readonly",
+        describe: "readonly",
+        it: "readonly",
+        test: "readonly",
+        expect: "readonly",
+        beforeAll: "readonly",
+        afterAll: "readonly",
+        beforeEach: "readonly",
+        afterEach: "readonly",
+        jest: "readonly"
       }
     },
     plugins: {
@@ -23,7 +32,7 @@ export default [
     },
     rules: {
       ...ts.configs.recommended.rules
-    },
+    }
   },
   prettierConfig
 ];
