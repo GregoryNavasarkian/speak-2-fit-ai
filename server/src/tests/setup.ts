@@ -21,5 +21,5 @@ afterEach(async () => {
 });
 
 // Suppress console.error and console.log output during tests
-jest.spyOn(console, "error").mockImplementation(() => { });
-jest.spyOn(console, "log").mockImplementation(() => { });
+jest.spyOn(console, "error").mockImplementation(() => {});
+jest.spyOn(console, "log").mockImplementation(() => {});
