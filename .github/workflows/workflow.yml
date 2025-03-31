@@ -53,6 +53,11 @@ jobs:
           cd client
           npm run format
 
+      - name: Test Server
+        run: |
+          cd server
+          npm run test
+
       - name: Build Docker Image
         run: |
           docker build -t us-central1-docker.pkg.dev/speak2fit-ai/speak2fit/speak2fit:latest .
@@ -73,9 +78,9 @@ jobs:
       - name: Setup Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
         with:
-          version: 'latest'
+          version: "latest"
           project_id: ${{ secrets.GCP_PROJECT_ID }}
-      
+
       - name: Deploy App
         run: |
           gcloud app deploy --image-url us-central1-docker.pkg.dev/speak2fit-ai/speak2fit/speak2fit
