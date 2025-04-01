@@ -65,8 +65,8 @@ describe("Exercise Log API", () => {
   it("should return 404 when a valid but non-existent ID is requested", async () => {
     const fakeId = new mongoose.Types.ObjectId().toString();
     const res = await request(app).get(`/api/exercise-log/${fakeId}`);
-    expect(res.status).toBe(200);
-    expect(res.body).toBeNull();
+    expect(res.status).toBe(404);
+    expect(res.body).toHaveProperty("message", "Exercise log not found");
   });
 
   it("should return 400 for malformed ObjectId", async () => {
