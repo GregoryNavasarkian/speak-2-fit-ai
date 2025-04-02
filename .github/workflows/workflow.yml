@@ -59,6 +59,11 @@ jobs:
           cd server
           npm run test
 
+      - name: Test Client
+        run: |
+          cd client
+          npm run test
+
       - name: Build Docker Image
         run: |
           docker build -t us-central1-docker.pkg.dev/speak2fit-ai/speak2fit/speak2fit:latest .
