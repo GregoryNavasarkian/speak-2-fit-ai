@@ -161,7 +161,7 @@ const Insights: React.FC = () => {
     <Container className="mt-4">
       <h2 className="mb-3">Insights</h2>
 
-      {loading && <Spinner animation="border" />}
+      {loading && <Spinner animation="border" role="status" />}
       {error && <Alert variant="danger">{error}</Alert>}
 
       {/* Filters */}
@@ -331,3 +331,4 @@ const Insights: React.FC = () => {
 };
 
 export default Insights;
+export { CustomTooltip };
