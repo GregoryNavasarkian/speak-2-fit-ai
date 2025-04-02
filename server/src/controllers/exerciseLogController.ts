@@ -35,6 +35,10 @@ export const getExerciseLogs = async (_req: Request, res: Response, next: NextFu
 export const getExerciseLog = async (req: Request, res: Response, next: NextFunction) => {
   try {
     const log = await ExerciseLog.findById(req.params.id);
+    if (!log) {
+      res.status(404).json({ message: "Exercise log not found" });
+      return;
+    }
     res.status(200).json(log);
   } catch (error) {
     next(error);
