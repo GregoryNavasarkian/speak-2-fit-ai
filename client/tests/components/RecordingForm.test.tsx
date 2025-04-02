@@ -34,7 +34,7 @@ describe("RecordingForm", () => {
 
   it("starts and stops recording, sets audioBlob and changes button icon", async () => {
     const blobMock = new Blob(["audio"], { type: "audio/wav" });
-    const chunks: BlobPart[] = [];
+    const chunks: Blob[] = [];
 
     const mockStop = vi.fn(() => {
       chunks.push(blobMock);
