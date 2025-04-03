@@ -97,6 +97,7 @@ jobs:
 
       - name: Setup Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
+        with:
           version: 'latest'
           project_id: ${{ secrets.GCP_PROJECT_ID }}
       
