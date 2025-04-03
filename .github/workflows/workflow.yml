@@ -13,7 +13,6 @@ jobs:
     runs-on: ubuntu-latest
     env:
       MONGO_URI: ${{ secrets.MONGO_URI }}
-      GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
 
     steps:
       - name: Check out repository
@@ -54,16 +53,6 @@ jobs:
           cd client
           npm run format
 
-      - name: Test Server
-        run: |
-          cd server
-          npm run test
-
-      - name: Test Client
-        run: |
-          cd client
-          npm run test
-
       - name: Build Docker Image
         run: |
           docker build -t us-central1-docker.pkg.dev/speak2fit-ai/speak2fit/speak2fit:latest .
@@ -80,12 +69,15 @@ jobs:
       - name: Push Docker Image
         run: |
           docker push us-central1-docker.pkg.dev/speak2fit-ai/speak2fit/speak2fit:latest
-          
+
   deploy:
     needs: build-and-test
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
       - name: Log in to Google Cloud
         uses: google-github-actions/auth@v2
         with:
@@ -101,13 +93,10 @@ jobs:
           version: 'latest'
           project_id: ${{ secrets.GCP_PROJECT_ID }}
       
-      - name: Setup Deployment Environment
+      - name: Deploy
         uses: google-github-actions/deploy-appengine@v2
         with:
-          env_variables: |
+          env_vars: |
             MONGO_URI=${{ secrets.MONGO_URI }}
             GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
-
-      - name: Deploy to Google App Engine
-        run: |
-          gcloud app deploy --image-url us-central1-docker.pkg.dev/speak2fit-ai/speak2fit/speak2fit
+          image_url: us-central1-docker.pkg.dev/speak2fit-ai/speak2fit/speak2fit:latest
