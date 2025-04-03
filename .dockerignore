@@ -5,6 +5,7 @@ client/.env
 client/src/.env
 client/src/.env.local
 .env
+speak2fit-ai-34f21450e8c8.json
 
 # Ignore node_modules (installed inside Docker container)
 node_modules

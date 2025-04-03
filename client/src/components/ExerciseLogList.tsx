@@ -45,7 +45,11 @@ const ExerciseLogList: React.FC = () => {
             log: Array.isArray(log.log) ? log.log : log.log.exercises || [],
             dateTime: log.dateTime,
           }))
-          .filter((log) => log.log.length > 0);
+          .filter((log) => log.log.length > 0)
+          .sort(
+            (a, b) =>
+              new Date(b.dateTime).getTime() - new Date(a.dateTime).getTime(),
+          );
 
         setExerciseLogs(formattedLogs);
         if (formattedLogs.length > 0) {
@@ -158,7 +162,13 @@ const ExerciseLogList: React.FC = () => {
     <div className="container mt-4">
       <h2>Exercise Logs</h2>
 
-      {loading && <Spinner animation="border" />}
+      {loading && (
+        <Spinner
+          animation="border"
+          data-testid="loading-spinner"
+          role="status"
+        />
+      )}
       {error && <Alert variant="danger">{error}</Alert>}
 
       {/* Date Picker for Filtering Logs */}

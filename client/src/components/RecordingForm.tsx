@@ -19,7 +19,7 @@ const RecordingForm: React.FC = () => {
     try {
       const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
       const recorder = new MediaRecorder(stream);
-      const chunks: BlobPart[] = [];
+      const chunks: Blob[] = [];
 
       recorder.ondataavailable = (event) => {
         chunks.push(event.data);
