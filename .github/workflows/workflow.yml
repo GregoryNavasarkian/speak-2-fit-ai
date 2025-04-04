@@ -81,12 +81,33 @@ jobs:
         run: |
           docker push us-central1-docker.pkg.dev/speak2fit-ai/speak2fit/speak2fit:latest
 
+  deploy:
+    needs: build-and-test
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v3
+
+      - name: Log in to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SERVICE_ACCOUNT_KEY }}
+
+      - name: Configure docker for gcloud
+        run: |
+          gcloud auth configure-docker us-central1-docker.pkg.dev
+
       - name: Setup Google Cloud SDK
         uses: google-github-actions/setup-gcloud@v2
         with:
-          version: "latest"
+          version: 'latest'
           project_id: ${{ secrets.GCP_PROJECT_ID }}
-
-      - name: Deploy App
-        run: |
-          gcloud app deploy --image-url us-central1-docker.pkg.dev/speak2fit-ai/speak2fit/speak2fit
+      
+      - name: Deploy
+        uses: google-github-actions/deploy-appengine@v2
+        with:
+          env_vars: |
+            MONGO_URI=${{ secrets.MONGO_URI }}
+            GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
+          image_url: us-central1-docker.pkg.dev/speak2fit-ai/speak2fit/speak2fit:latest
