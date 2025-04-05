@@ -253,7 +253,7 @@ const ExerciseLogList: React.FC = () => {
 
                                 <Button
                                   variant="link"
-                                  className="p-0 mt-2"
+                                  className="p-0 mt-2 speak-to-fit-no-bg-btn"
                                   onClick={() => handleToggleLog(log._id)}
                                 >
                                   {expandedLogs[log._id]
@@ -462,7 +462,7 @@ const ExerciseLogList: React.FC = () => {
                               <>
                                 <Button
                                   variant="success"
-                                  className="mt-2 me-2"
+                                  className="mt-2 me-2 speak-to-fit-btn"
                                   onClick={() => handleSave(log._id)}
                                 >
                                   Save
@@ -478,7 +478,7 @@ const ExerciseLogList: React.FC = () => {
                             ) : (
                               <Button
                                 variant="primary"
-                                className="mt-2 me-2"
+                                className="mt-2 me-2 speak-to-fit-btn"
                                 onClick={() => handleEdit(log._id, log.log)}
                               >
                                 Edit
@@ -488,7 +488,7 @@ const ExerciseLogList: React.FC = () => {
                             {editingLogId !== log._id && (
                               <Button
                                 variant="danger"
-                                className="mt-2"
+                                className="mt-2 speak-to-fit-cancel-btn"
                                 onClick={() => handleDelete(log._id)}
                               >
                                 Delete

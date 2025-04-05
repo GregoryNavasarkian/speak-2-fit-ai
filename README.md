@@ -12,9 +12,8 @@
 ```
 clone repository
 npm ci
-cd ./server && npm ci
-cd ./client && npm ci
-npm run dev
+cd ./server && npm ci && npm start
+cd ./client && npm ci && npm run dev
 ```
 
 ### Production Mode

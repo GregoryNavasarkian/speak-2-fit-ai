@@ -225,7 +225,11 @@ const Insights: React.FC = () => {
       </Row>
 
       {/* Tabs */}
-      <Tabs defaultActiveKey="bar" id="insights-tabs" className="mb-3">
+      <Tabs
+        defaultActiveKey="bar"
+        id="insights-tabs"
+        className="mb-3 speak-to-fit-tabs"
+      >
         <Tab eventKey="bar" title="Bar Chart">
           <ResponsiveContainer width="100%" height={300}>
             <BarChart data={chartData}>
