@@ -150,10 +150,7 @@ const RecordingForm: React.FC = () => {
             onChange={(e) => setText(e.target.value)}
           />
           <Button
-            style={{
-              backgroundColor: isRecording ? "#dc3545" : "#61ac85",
-              borderColor: isRecording ? "#dc3545" : "#61ac85",
-            }}
+            className={`${isRecording ? "speak-to-fit-cancel-btn" : "speak-to-fit-btn"}`}
             onClick={isRecording ? handleStopRecording : handleStartRecording}
           >
             {isRecording ? <MicMuteFill /> : <MicFill />}
@@ -164,11 +161,8 @@ const RecordingForm: React.FC = () => {
         {(text || hasRecorded) && (
           <div className="mt-3 d-flex gap-2">
             <Button
+              className="speak-to-fit-btn"
               type="submit"
-              style={{
-                backgroundColor: "#61ac85",
-                borderColor: "#61ac85",
-              }}
               disabled={isLoading}
             >
               {isLoading ? <Spinner animation="border" size="sm" /> : "Submit"}
@@ -277,12 +271,8 @@ const RecordingForm: React.FC = () => {
           )}
 
           <Button
-            style={{
-              backgroundColor: "#61ac85",
-              borderColor: "#61ac85",
-            }}
             variant="success"
-            className="mt-2"
+            className="mt-2 speak-to-fit-btn"
             onClick={handleSaveExercises}
           >
             Save Exercise

@@ -1,0 +1,63 @@
+.speak-to-fit-btn {
+  background-color: #61ac85;
+  border-color: #61ac85;
+}
+
+.speak-to-fit-btn:hover:not(:disabled) {
+  background-color: #2c9678;
+  border-color: #2c9678;
+}
+
+.speak-to-fit-btn:active:not(:disabled),
+.speak-to-fit-btn:focus:not(:disabled) {
+  background-color: #61ac85;
+  border-color: #61ac85;
+  box-shadow: none;
+}
+
+.speak-to-fit-btn:disabled {
+  background-color: #61ac85;
+  border-color: #61ac85;
+  opacity: 1;
+}
+
+.speak-to-fit-cancel-btn {
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.speak-to-fit-cancel-btn:hover:not(:disabled) {
+  background-color: #82111f;
+  border-color: #82111f;
+}
+
+.speak-to-fit-cancel-btn:active:not(:disabled),
+.speak-to-fit-cancel-btn:focus:not(:disabled) {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  box-shadow: none;
+}
+
+.speak-to-fit-cancel-btn:disabled {
+  background-color: #dc3545;
+  border-color: #dc3545;
+  opacity: 1;
+}
+
+.speak-to-fit-no-bg-btn,
+.speak-to-fit-no-bg-btn:active:not(:disabled),
+.speak-to-fit-no-bg-btn:focus:not(:disabled) {
+  color: #61ac85;
+}
+
+.speak-to-fit-no-bg-btn:hover:not(:disabled) {
+  color: #2c9678;
+}
+
+.speak-to-fit-no-bg-btn:disabled {
+  color: #61ac85;
+}
+
+.speak-to-fit-tabs .nav-link {
+  color: #61ac85;
+}

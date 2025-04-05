@@ -6,6 +6,8 @@ import HomeRoute from "./routes/HomeRoute";
 import ExercisesRoute from "./routes/ExercisesRoute";
 import InsightRoute from "./routes/InsightRoute";
 
+import "./App.css";
+
 const App: React.FC = () => {
   return (
     <BrowserRouter>
