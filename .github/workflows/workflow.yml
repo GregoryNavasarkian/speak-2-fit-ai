@@ -111,3 +111,15 @@ jobs:
             MONGO_URI=${{ secrets.MONGO_URI }}
             GEMINI_API_KEY=${{ secrets.GEMINI_API_KEY }}
           image_url: us-central1-docker.pkg.dev/speak2fit-ai/speak2fit/speak2fit:latest
+  sonarqube:
+    name: SonarQube
+    needs: build-and-test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: SonarQube Scan
+        uses: SonarSource/sonarqube-scan-action@v5
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
